@@ -1,6 +1,6 @@
 /*
 @license
-dhtmlxScheduler v.4.3.1 
+dhtmlxScheduler v.4.3.1
 
 This software is covered by GPL license. You also can obtain Commercial or Enterprise license to use it in non-GPL project - please contact sales@dhtmlx.com. Usage without proper license is prohibited.
 
@@ -36,7 +36,10 @@ scheduler.form_blocks['combo']={
 			}
 		})();
 		window.dhx_globalImgPath = config.image_path||'/';
-		node._combo = new dhtmlXCombo(node, config.name, node.offsetWidth-8);
+		if(config.width === '' || config.width === undefined)
+			node._combo = new dhtmlXCombo(node, config.name, node.offsetWidth-8);
+			else
+			node._combo = new dhtmlXCombo(node,config.name,config.width);
 		if (config.onchange)
 			node._combo.attachEvent("onChange", config.onchange);
 
@@ -44,7 +47,7 @@ scheduler.form_blocks['combo']={
 			node._combo.setOptionHeight(config.options_height);
 		var combo = node._combo;
 		combo.enableFilteringMode(config.filtering, config.script_path||null, !!config.cache);
-		
+
 		if (!config.script_path) { // script-side filtration is used
 			var all_options = [];
 			for (var i = 0; i < config.options.length; i++) {
@@ -107,7 +110,7 @@ scheduler.form_blocks['radio']={
 				res += "<br/>";
 		}
 		res += "</div>";
-		
+
 		return res;
 	},
 	set_value:function(node,value,ev,config){
@@ -144,12 +147,12 @@ scheduler.form_blocks['checkbox']={
 		var id = scheduler.uid();
 		var isChecked = (typeof config.checked_value != "undefined") ? value == config.checked_value : !!value;
 		node.className += " dhx_cal_checkbox";
-		var check_html = "<input id='"+id+"' type='checkbox' value='true' name='"+config.name+"'"+((isChecked)?"checked='true'":'')+"'>"; 
+		var check_html = "<input id='"+id+"' type='checkbox' value='true' name='"+config.name+"'"+((isChecked)?"checked='true'":'')+"'>";
 		var label_html = "<label for='"+id+"'>"+(scheduler.locale.labels["section_"+config.name]||config.name)+"</label>";
 		if (scheduler.config.wide_form){
 			node.innerHTML = label_html;
 			node.nextSibling.innerHTML=check_html;
-		} else 
+		} else
 			node.innerHTML=check_html+label_html;
 
 		if (config.handler) {
