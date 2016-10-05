@@ -11,7 +11,7 @@ scheduler.form_blocks['combo']={
 		if (!sns.cached_options)
 			sns.cached_options = {};
 		var res = '';
-		res += "<div class='"+sns.type+"' style='height:"+(sns.height||20)+"px;' ></div>";
+		res += "<div class='"+sns.type+"' style='height:"+(sns.height||20)+"px;margin-left:116px' ></div>";
 		return res;
 	},
 	set_value:function(node,value,ev,config){
